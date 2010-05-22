@@ -1,0 +1,21 @@
+Simple Wall of Sheep/Shame written in Perl.
+(C) Kost (kost.com.hr). Distributed under GPL. 
+
+It can be run in HTML, CGI and web server mode.
+Uses ettercap for actual sniffing, it just displays results.
+
+You need to feed this script with ettercap log file. Few examples:
+ettercap -Tq -m sniff.log
+ettercap -Tq -m sniff.log -M arp /gateway-IP/ //.
+
+After that, you need to start wall of sheep (in mode you preffer):
+
+HTML mode:
+while true; do (./wall-of-sheep.pl --html --url http://192.168.0.1/wos.html > /var/www/wos.html) ; sleep 10; done
+
+Web server mode:
+./wall-of-sheep.pl --host 192.168.0.1 --log sniff.log
+
+Note that this implementation should be used with care. 
+It's still DoS vulnerable... (Feel free to send patch!)
+
