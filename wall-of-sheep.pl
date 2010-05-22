@@ -8,6 +8,8 @@
 use strict;
 use Socket;
 use Getopt::Long;
+use HTML::Entities;
+
 
 my $lookupdns=0;
 my $mode=2;  # 0 - <write HTML file>, 1 - cgi, 2 - web server
@@ -55,12 +57,9 @@ sub parse_line {
 	$pass2 = "...";
 	$pass=$pass1.$pass2;
 
-	$user =~ s/\</&lt/ig;
-	$user =~ s/\>/&gt/ig;
-	$pass =~ s/\</&lt/ig;
-	$pass =~ s/\>/&gt/ig;
-	$info =~ s/\</&lt/ig;
-	$info =~ s/\>/&gt/ig;
+	$user = encode_entities($user);
+	$pass = encode_entities($pass);
+	$info = encode_entities($info);	
 
 #	print $protocol.";".$host.";".$port.";".$user.";".$pass.";".$info.";\n";
 	$ret="<TR><TD>$protocol</TD><TD>$host</TD><TD>$port</TD><TD>$user</TD><TD>$pass</TD><TD>$info</TD></TR>\n";
